@@ -9,9 +9,9 @@
     <h1>Calendario</h1>
 
     <label for="">Digite uma data:</label>
-    <input type="text" id="data 1" />
-    <input type="text" id="data 2">
-    <button id="enviar">enviar</button>
+    <input type="text" id="data1" />
+    <input type="text" id="data2" />
+    <button onclick="soma()" id="enviar">enviar</button>
     <div id="resultado"></div>
 
     <table class="calendar">
@@ -24,12 +24,10 @@
           <th>Qui</th>
           <th>Sex</th>
           <th>Sab</th>
-          <th>Dom</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td></td>
           <td></td>
           <td></td>
           <td>1</td>
@@ -46,35 +44,31 @@
           <td>10</td>
           <td>11</td>
           <td>12</td>
-          <td>13</td>
         </tr>
         <tr>
+          <td>13</td>
           <td>14</td>
           <td>15</td>
           <td>16</td>
           <td>17</td>
           <td>18</td>
           <td>19</td>
-          <td>20</td>
-          <td>21</td>
         </tr>
         <tr>
+          <td>20</td>
+          <td>21</td>
           <td>22</td>
           <td>23</td>
           <td>24</td>
           <td>25</td>
           <td>26</td>
+        </tr>
+        <tr>
           <td>27</td>
           <td>28</td>
           <td>29</td>
-        </tr>
-        <tr>
           <td>30</td>
           <td>31</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
           <td></td>
           <td></td>
         </tr>
@@ -82,30 +76,50 @@
     </table>
 
     <script>
-      let data1 = document.getElementById("data 1");
-      let data2 = document.getElementById("data 2");
       const botao = document.getElementById("enviar");
       const lista = document.getElementById("calendar");
-      const itens = document.querySelectorAll("td");
       const resultado = document.getElementById("resultado");
-     
-      botao.addEventListener("click", soma)
 
-      function soma(){
-        const soma = parseInt(input.value);
-        for (let i = 1; i <= 31; i++){
+      //botao.addEventListener("click", function () {
+      //  soma();
+      // });
+
+      function soma() {
+        let data1 = document.getElementById("data1");
+        let data2 = document.getElementById("data2");
+        const itens = document.querySelectorAll("td");
+
+        data1 = parseInt(data1.value);
+        data2 = parseInt(data2.value);
+        let diaMes = data2 - data1;
         const linha = document.createElement("p");
-        linha.textContent = `${soma} + ${i} = ${valor + i}`;
+        linha.textContent = `entre as datas mencionadas têm ${
+          data2 - data1
+        } dias`;
         resultado.appendChild(linha);
-        for (let i = 1; i < itens.length; i++) {
-          if (itens[i].textContent == input.value) {
+        //limpa o calendario
+        for (let i = 0; i < itens.length; i++) {
+          itens[i].style.backgroundColor = "transparent";
+          itens[i].style.color = "black";
+        }
+
+        for (let i = 0; i < itens.length; i++) {
+          if (itens[i].textContent == data1) {
             itens[i].style.backgroundColor = "orange";
-            console.log("teste")
           }
         }
+        for (let i = 0; i < itens.length; i++) {
+          if (itens[i].textContent == data2) {
+            itens[i].style.backgroundColor = "orange";
+          }
+        }
+        for (let i = data1; i <= data2; i++) {
+          if (itens[i].textContent > data1) {
+            itens[i].style.backgroundColor = "blue";
+            itens[i].style.color = "white";
+          }
         }
       }
-
     </script>
   </body>
 </html>
